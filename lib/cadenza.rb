@@ -1,5 +1,6 @@
 require 'cadenza/error'
 require 'cadenza/token'
+require 'cadenza/ragel_lexer'
 require 'cadenza/lexer'
 require 'cadenza/racc_parser'
 require 'cadenza/parser'

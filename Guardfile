@@ -38,4 +38,5 @@ end
 
 guard 'shell' do
    watch('src/cadenza.y') { puts `rake compile:parser` }
+   watch('src/cadenza.rl') { puts `rake compile:lexer` }
 end
