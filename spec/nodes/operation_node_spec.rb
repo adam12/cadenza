@@ -70,51 +70,51 @@ describe Cadenza::OperationNode do
       let(:false_condition) { subject.new(twenty, '<', ten) }
 
       it "should evaluate equality operators" do
-         subject.new(ten, '==', twenty).eval(context).should be_false
-         subject.new(ten, '==', ten).eval(context).should be_true
+         subject.new(ten, '==', twenty).eval(context).should == false
+         subject.new(ten, '==', ten).eval(context).should == true
       end
 
       it "should evaluate inequality operators" do
-         subject.new(ten, '!=', twenty).eval(context).should be_true
-         subject.new(ten, '!=', ten).eval(context).should be_false
+         subject.new(ten, '!=', twenty).eval(context).should == true
+         subject.new(ten, '!=', ten).eval(context).should == false
       end
 
       it "should evaluate greater than or equal to operators" do
-         subject.new(ten,    '>=', twenty).eval(context).should be_false
-         subject.new(ten,    '>=', ten).eval(context).should be_true
-         subject.new(twenty, '>=', ten).eval(context).should be_true
+         subject.new(ten,    '>=', twenty).eval(context).should == false
+         subject.new(ten,    '>=', ten).eval(context).should == true
+         subject.new(twenty, '>=', ten).eval(context).should == true
       end
 
       it "should evaluate less than or equal to operators" do
-         subject.new(ten,    '<=', twenty).eval(context).should be_true
-         subject.new(ten,    '<=', ten).eval(context).should be_true
-         subject.new(twenty, '<=', ten).eval(context).should be_false         
+         subject.new(ten,    '<=', twenty).eval(context).should == true
+         subject.new(ten,    '<=', ten).eval(context).should == true
+         subject.new(twenty, '<=', ten).eval(context).should == false
       end
 
       it "should evaluate less than operators" do
-         subject.new(ten,    '<', twenty).eval(context).should be_true
-         subject.new(ten,    '<', ten).eval(context).should be_false
-         subject.new(twenty, '<', ten).eval(context).should be_false         
+         subject.new(ten,    '<', twenty).eval(context).should == true
+         subject.new(ten,    '<', ten).eval(context).should == false
+         subject.new(twenty, '<', ten).eval(context).should == false
       end
 
       it "should evaluate greater than operators" do
-         subject.new(ten,    '>', twenty).eval(context).should be_false
-         subject.new(ten,    '>', ten).eval(context).should be_false
-         subject.new(twenty, '>', ten).eval(context).should be_true         
+         subject.new(ten,    '>', twenty).eval(context).should == false
+         subject.new(ten,    '>', ten).eval(context).should == false
+         subject.new(twenty, '>', ten).eval(context).should == true
       end
 
       it "should evaluate 'and' conjunctions" do
-         subject.new(true_condition,  'and', true_condition).eval(context).should  be_true
-         subject.new(true_condition,  'and', false_condition).eval(context).should be_false
-         subject.new(false_condition, 'and', true_condition).eval(context).should  be_false
-         subject.new(false_condition, 'and', false_condition).eval(context).should be_false
+         subject.new(true_condition,  'and', true_condition).eval(context).should  == true
+         subject.new(true_condition,  'and', false_condition).eval(context).should == false
+         subject.new(false_condition, 'and', true_condition).eval(context).should  == false
+         subject.new(false_condition, 'and', false_condition).eval(context).should == false
       end
 
       it "should evaluate 'or' conjunctions" do
-         subject.new(true_condition,  'or', true_condition).eval(context).should  be_true
-         subject.new(true_condition,  'or', false_condition).eval(context).should be_true
-         subject.new(false_condition, 'or', true_condition).eval(context).should  be_true
-         subject.new(false_condition, 'or', false_condition).eval(context).should be_false
+         subject.new(true_condition,  'or', true_condition).eval(context).should  == true
+         subject.new(true_condition,  'or', false_condition).eval(context).should == true
+         subject.new(false_condition, 'or', true_condition).eval(context).should  == true
+         subject.new(false_condition, 'or', false_condition).eval(context).should == false
       end
 
       it "should evaluate plus operators" do

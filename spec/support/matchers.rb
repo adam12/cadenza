@@ -16,7 +16,7 @@ RSpec::Matchers.define :equal_html do |expected|
     @diff.empty?
   end
 
-  failure_message_for_should do |actual|
+  failure_message do |actual|
     result = ""
 
     @diff.each do |path, diffs|
@@ -40,7 +40,7 @@ RSpec::Matchers.define :equal_syntax_tree do |expected|
     @tree.equals(actual)
   end
 
-  failure_message_for_should do |actual|
+  failure_message do |actual|
     "expected that #{actual.inspect} would have an identical syntax tree to #{@tree.document.inspect}"
   end
 end

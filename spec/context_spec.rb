@@ -144,12 +144,12 @@ describe Cadenza::Context do
       end
 
       it "should allow adding a load path" do
-         path = Fixture.filename("foo")
+         path = Fixture.filename('foo')
          context.add_load_path(path)
 
-         context.loaders.should have(1).item
-         context.loaders[0].should be_a Cadenza::FilesystemLoader
-         context.loaders[0].path.should == path
+         expect(context.loaders.length).to eq 1
+         expect(context.loaders[0]).to be_an_instance_of Cadenza::FilesystemLoader
+         expect(context.loaders[0].path).to eq path
       end
 
       it "should return nil if no template was found" do
@@ -162,7 +162,7 @@ describe Cadenza::Context do
 
       it "should raise an error if no template was found and whiny template loading is enabled" do
          context.whiny_template_loading = true
-         
+
          lambda do
             context.load_source("fake.html")
          end.should raise_error Cadenza::TemplateNotFoundError
@@ -188,8 +188,8 @@ describe Cadenza::Context do
          context.add_loader(filesystem_loader)
          context.add_loader(other_loader)
 
-         filesystem_loader.should_receive(:load_template).with("template.html").and_return(template)
-         other_loader.stub(:load_template).and_return("foo")
+         expect(filesystem_loader).to receive(:load_template).with("template.html").and_return(template)
+         allow(other_loader).to receive(:load_template).and_return("foo")
 
          context.load_template("template.html").should == template
       end

@@ -59,7 +59,7 @@ describe Cadenza::TextRenderer do
 
       let(:custom_if_blocks_template) { Fixture.read("templates/if_node/custom_blocks.html.cadenza") }
       let(:custom_if_blocks_output)   { Fixture.read("templates/if_node/custom_blocks.html") }
-   
+
       it "should render the stringified result of a boolean node's value" do
          expect_rendering("{{ pi > 1 }}", context).to eq "true"
       end
@@ -137,7 +137,7 @@ describe Cadenza::TextRenderer do
          layout.add_block(lorem_block)
          layout.children.push lorem_block
 
-         context.stub(:load_template).and_return(layout)
+         allow(context).to receive(:load_template).and_return(layout)
 
          expect_rendering(document, context).to eq "Hello World"
       end

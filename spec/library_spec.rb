@@ -29,21 +29,15 @@ describe Cadenza::Library do
 
    context "inclusion" do
       it "copies all defined filters into the included class" do
-         library.should have(0).filters
-         library.send(:include, standard_library)
-         library.should have(1).filters
+        expect { library.send(:include, standard_library) }.to change(library.filters, :length).from(0).to(1)
       end
 
       it "copies all defined blocks into the included class" do
-         library.should have(0).blocks
-         library.send(:include, standard_library)
-         library.should have(1).blocks
+        expect { library.send(:include, standard_library) }.to change(library.blocks, :length).from(0).to(1)
       end
 
       it "copies all defined functions into the included class" do
-         library.should have(0).functions
-         library.send(:include, standard_library)
-         library.should have(1).functions
+        expect { library.send(:include, standard_library) }.to change(library.functions, :length).from(0).to(1)
       end
    end
 
@@ -61,15 +55,15 @@ describe Cadenza::Library do
       let(:subclass) { Class.new(superclass) }
 
       it "has all the filters the superclass does" do
-         subclass.should have(2).filters
+        expect(subclass.filters.length).to eq 2
       end
 
       it "has all the blocks the superclass does" do
-         subclass.should have(2).blocks
+        expect(subclass.blocks.length).to eq 2
       end
 
       it "has all the functions the superclass does" do
-         subclass.should have(2).functions
+        expect(subclass.functions.length).to eq 2
       end
    end
 
@@ -101,9 +95,9 @@ describe Cadenza::Library do
             define_function(:bar) {}
          end
 
-         extra_standard_library.should have(2).filters
-         extra_standard_library.should have(2).blocks
-         extra_standard_library.should have(2).functions
+         expect(extra_standard_library.filters.length).to eq 2
+         expect(extra_standard_library.blocks.length).to eq 2
+         expect(extra_standard_library.functions.length).to eq 2
       end
    end
 end

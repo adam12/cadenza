@@ -16,17 +16,17 @@ describe Cadenza::ContextObject do
    end
 
    it "invokes before_method if defined" do
-      subject.should_receive(:before_method).once
+      expect(subject).to receive(:before_method).once
       subject.send(:invoke_context_method, "public_visibility_method")
    end
 
    it "invokes after_method if defined" do
-      subject.should_receive(:after_method).once
+      expect(subject).to receive(:after_method).once
       subject.send(:invoke_context_method, "public_visibility_method")
    end
 
    it "invokes missing_context_method if trying to invoke a method which doesn't exist" do
-      subject.should_receive(:missing_context_method).with("foo").once
+      expect(subject).to receive(:missing_context_method).with("foo").once
       subject.send(:invoke_context_method, "foo")
    end
 

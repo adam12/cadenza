@@ -16,7 +16,7 @@ describe Cadenza::Library::Functions do
 
       it "should evaluate a function" do
          context.lookup("foo").should be_nil
-         
+
          library.evaluate_function(:assign, context, ["foo", 123])
 
          context.lookup("foo").should == 123
@@ -28,7 +28,7 @@ describe Cadenza::Library::Functions do
          end.should raise_error Cadenza::FunctionNotDefinedError
       end
    end
-   
+
    context "#lookup_function" do
       it "returns the given function" do
          library.lookup_function(:assign).should be_a Proc
@@ -62,37 +62,37 @@ describe Cadenza::Library::Functions do
    end
 
    context "deprecated functions" do
-      before { library.should_receive(:warn) }
+      before { expect(library).to receive(:warn) }
 
       it "has deprecated #functional_variables" do
-         library.should_receive(:functions)
+         expect(library).to receive(:functions)
          library.functional_variables
       end
 
       it 'has deprecated #lookup_functional_variable' do
-         library.should_receive(:lookup_function)
+         expect(library).to receive(:lookup_function)
          library.lookup_functional_variable(:assign)
       end
 
       it 'has deprecated #define_functional_variable' do
-         library.should_receive(:define_function)
+         expect(library).to receive(:define_function)
          library.define_functional_variable(:zomg) {}
       end
 
       it 'has deprecated #alias_functional_variable' do
-         library.should_receive(:alias_function)
+         expect(library).to receive(:alias_function)
          library.alias_functional_variable(:assign, :zomg)
       end
 
       it 'has deprecated #evaluate_functional_variable' do
-         library.should_receive(:evaluate_function)
+         expect(library).to receive(:evaluate_function)
          library.evaluate_functional_variable(:assign, context, ["foo", 123])
       end
    end
 
    context "deprecated constants" do
       it 'has deprecated FunctionalVariableNotDefinedError' do
-         Cadenza.should_receive(:warn)
+         expect(Cadenza).to receive(:warn)
          Cadenza::FunctionalVariableNotDefinedError.should == Cadenza::FunctionNotDefinedError
       end
    end
