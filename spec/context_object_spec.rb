@@ -4,15 +4,15 @@ describe Cadenza::ContextObject do
    subject { TestContextObject.new }
 
    it "invokes public methods" do
-      subject.send(:invoke_context_method, "public_visibility_method").should == 123
+      expect(subject.send(:invoke_context_method, "public_visibility_method")).to eq(123)
    end
 
    it "doesn't invoke private methods" do
-      subject.send(:invoke_context_method, "private_visibility_method").should == nil
+      expect(subject.send(:invoke_context_method, "private_visibility_method")).to eq(nil)
    end
 
    it "doesn't invoke protected methods" do
-      subject.send(:invoke_context_method, "protected_visibility_method").should == nil
+      expect(subject.send(:invoke_context_method, "protected_visibility_method")).to eq(nil)
    end
 
    it "invokes before_method if defined" do
@@ -32,7 +32,7 @@ describe Cadenza::ContextObject do
 
    context "#context_methods" do
       it "returns only the public methods defined on it, not public methods of Object" do
-         subject.send(:context_methods).should == %w(public_visibility_method)
+         expect(subject.send(:context_methods)).to eq(%w(public_visibility_method))
       end
    end
 end

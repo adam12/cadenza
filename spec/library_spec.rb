@@ -15,15 +15,15 @@ describe Cadenza::Library do
 
    context "extension" do
       it "extends the module with Cadenza::Library::Filters" do
-         library.should be_a Cadenza::Library::Filters
+         expect(library).to be_a Cadenza::Library::Filters
       end
 
       it "extends the module with Cadenza::Library::Blocks" do
-         library.should be_a Cadenza::Library::Blocks
+         expect(library).to be_a Cadenza::Library::Blocks
       end
 
       it "extends the module with Cadenza::Library::FunctionalVariables" do
-         library.should be_a Cadenza::Library::Functions
+         expect(library).to be_a Cadenza::Library::Functions
       end
    end
 
@@ -69,15 +69,15 @@ describe Cadenza::Library do
 
    context "#build" do
       it "returns a new module" do
-         subject.build.should be_an_instance_of Module
+         expect(subject.build).to be_an_instance_of Module
       end
 
       it "extends the returned module by Library" do
-         subject.build.should be_a Cadenza::Library
+         expect(subject.build).to be_a Cadenza::Library
       end
 
       it "defines #enhance on the returned module" do
-         subject.build.should respond_to :enhance
+         expect(subject.build).to respond_to :enhance
       end
 
       it "calls a passed block on it's own instance" do
@@ -85,7 +85,7 @@ describe Cadenza::Library do
             define_filter(:foo) {}
          end
 
-         lib.filters[:foo].should_not be_nil
+         expect(lib.filters[:foo]).not_to be_nil
       end
 
       it "copies all filters, blocks and variables when enhancing an existing library" do
